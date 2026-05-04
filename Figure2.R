@@ -109,14 +109,14 @@ VlnExp <- function(object,
     df1$labels <- scales::percent(df1$value,accuracy=0.1)
     df1$labels[2] <- ''
     ggplot(df1, aes(x= '', value, fill=type)) +
-      geom_col(color='black') + #饼图边设置为黑色
+      geom_col(color='black') + 
       coord_polar(theta = 'y') +
       theme_void() + 
       theme_transparent() +
       theme(legend.position = "none")+
       geom_text(aes(label = labels), 
                 position = position_stack(vjust = 0.5), size=4)+
-      scale_fill_manual(values = c(cols[i],"grey80"))#修改饼图填充颜色
+      scale_fill_manual(values = c(cols[i],"grey80"))
   }
   #data for pie
   exp_pct$pie <- lapply(1:nrow(exp_pct), plot_pie)
@@ -139,11 +139,11 @@ VlnExp <- function(object,
           axis.title.y = element_text(color = 'black', face = "bold", size = 15),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
-          panel.border = element_rect(color="black",size = 1.2, linetype="solid"),#修改边框大小
+          panel.border = element_rect(color="black",size = 1.2, linetype="solid"),
           panel.spacing = unit(0.12, "cm"),
-          plot.title = element_text(hjust = 0.5, face = "bold.italic"),#字体加粗斜体
+          plot.title = element_text(hjust = 0.5, face = "bold.italic"),
           legend.position = 'none')&
-    stat_compare_means(method="wilcox.test",hide.ns = F, #显著性检验
+    stat_compare_means(method="wilcox.test",hide.ns = F, 
                        comparisons = comparisons,
                        label="p.format",
                        bracket.size=0.8,
@@ -151,7 +151,7 @@ VlnExp <- function(object,
                        size=5,
                        vjust = 0.6,
                        label.y = label.y.pos)&
-    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))& #修改y轴，让其适应显著性检验标注
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))& 
     scale_fill_manual(values = cols)&
     geom_subview(aes(x=x, y=y, 
                      subview=pie,width = width,
